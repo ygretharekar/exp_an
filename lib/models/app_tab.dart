@@ -1,0 +1,4 @@
+enum AppTab {
+  progress,
+  stats
+}
