@@ -35,6 +35,4 @@ class CounterStorage {
 
     return file.writeAsString('$counter');
   }
-
-
 }
