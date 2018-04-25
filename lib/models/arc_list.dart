@@ -10,12 +10,15 @@ class ArcList {
 
     List<ArcData> listArc = [];
 
-    for(int i = 0; i < arcList.arcs.length; ++i ){
-      listArc.add(arcList.arcs[i]);
+    for(int i = 0; i < arcList.arcs.length; i++ ){
+      listArc.add(
+          new ArcData(
+              startAngle: arcList.arcs[i].startAngle,
+              angle: 0.0
+          )
+      );
     }
-
     return new ArcList(listArc);
-
   }
 
   ArcList addArc(ArcData arc){
@@ -29,13 +32,11 @@ class ArcList {
 
     List<ArcData> ans = new List.generate(
         begin.arcs.length,
-        (i) {
-          return ArcData.lerp(
+        (i) => ArcData.lerp(
               begin.arcs[i],
               end.arcs[i],
               t
-          );
-        }
+        )
     );
 
     return new ArcList(ans);

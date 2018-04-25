@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
               new ArcData(
                   startAngle: 5.49779,
                   angle: 1.5708,
-                  color: Colors.black12
+                  color: Colors.deepPurple
               ),
             ]
         )
