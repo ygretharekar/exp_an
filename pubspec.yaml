@@ -57,17 +57,17 @@ flutter:
         fonts:
          - asset: fonts/DoHyeon-Regular.ttf
 
-#      - family: Gugi
-#        fonts:
-#         - asset: fonts/Gugi-Regular.ttf
+      - family: Gugi
+        fonts:
+         - asset: fonts/Gugi-Regular.ttf
 #  #       - asset: fonts/Schyler-Italic.ttf
 #  #         style: italic
 #
-#     - family: Gaegu
+#      - family: Gaegu
 #       fonts:
+#         - asset: fonts/Gaegu-Regular.ttf
 #         - asset: fonts/Gaegu-Bold.ttf
 #         - asset: fonts/Gaegu-Light.ttf
-#         - asset: fonts/Gaegu-Regular.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies, 

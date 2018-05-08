@@ -5,3 +5,6 @@ export 'arc_data.dart';
 export 'arc_list.dart';
 export 'arc_tween.dart';
 export 'arc_list_tween.dart';
+export 'catagories.dart';
+export 'periodic.dart';
+export 'transaction.dart';

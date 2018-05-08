@@ -46,7 +46,9 @@ class DrawArcState extends State<DrawArc> with TickerProviderStateMixin {
   Widget build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Expense Analysis'),
+        title: new Text(
+            'Expense Analysis'
+        ),
         bottom: new PreferredSize(
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,31 +75,29 @@ class DrawArcState extends State<DrawArc> with TickerProviderStateMixin {
             preferredSize: new Size(200.0, 300.0)
         ),
         actions: <Widget>[
-          new IconButton(
-              icon: new Icon(Icons.dehaze),
-              color: Colors.white,
-              onPressed: null
-          )
         ],
       ),
+
       bottomNavigationBar: new BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             new BottomNavigationBarItem(
-                icon: new Icon(Icons.home),
-                title: new Text('home')
+                icon: new Icon(Icons.settings),
+                title: new Text('setting')
             ),
             new BottomNavigationBarItem(
                 icon: new Icon(Icons.home),
                 title: new Text('home')
             ),
             new BottomNavigationBarItem(
-                icon: new Icon(Icons.home),
-                title: new Text('home')
+                icon: new Icon(Icons.account_balance_wallet),
+                title: new Text('details')
             ),
           ]
       ),
       floatingActionButton: new FloatingActionButton(
-          onPressed: null,
+          onPressed: (){
+            Navigator.pushNamed(context, '/addTransaction');
+          },
           child: new Icon(Icons.add),
       ),
       drawer: new Drawer(
@@ -105,4 +105,5 @@ class DrawArcState extends State<DrawArc> with TickerProviderStateMixin {
       ),
     );
   }
+
 }

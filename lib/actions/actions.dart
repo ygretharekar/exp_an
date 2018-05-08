@@ -15,3 +15,9 @@ class AddArc{
 
   AddArc(this.arc);
 }
+
+class AddTrans{
+  final Transaction transaction;
+
+  AddTrans(this.transaction);
+}

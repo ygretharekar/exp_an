@@ -45,12 +45,38 @@ class ArcPainter extends CustomPainter {
         }
     );
 
+    var money = '\u{20B9}';
 
+    TextSpan rupee;
+
+
+    TextStyle style = new TextStyle(
+        color: Colors.white70
+    );
+
+    rupee = new TextSpan(
+        text: money,
+        style: style
+    );
+
+    TextPainter rp = new TextPainter(
+      text: rupee,
+      textDirection: TextDirection.ltr,
+      textScaleFactor: 3.0
+    );
+
+    rp.layout();
+
+    rp.paint(
+        canvas,
+        new Offset(size.width/2 - rp.width/2, size.height/2 - 80.0)
+    );
 
     TextSpan span = new TextSpan(
         text: '10000',
         style: new TextStyle(
-          color: Colors.white
+          color: Colors.white,
+          fontFamily: 'Gugi'
         )
     );
 
@@ -65,8 +91,30 @@ class ArcPainter extends CustomPainter {
 
     tp.paint(
         canvas,
-        new Offset(size.width/2 - tp.width/2, size.height/2 - 40.0)
+        new Offset(size.width/2 - tp.width/2, size.height/2 - 20.0)
     );
+
+    TextSpan rem = new TextSpan(
+        text: 'remaining',
+        style: new TextStyle(
+          color: Colors.white70,
+          fontFamily: 'Do_Hyeon'
+        )
+    );
+
+    TextPainter remp = new TextPainter(
+        text: rem,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr
+    );
+
+    remp.layout();
+
+    remp.paint(
+        canvas,
+        new Offset(size.width/2 - remp.width/2, size.height/2 + 50.0)
+    );
+
   }
 
   @override

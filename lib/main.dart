@@ -6,6 +6,8 @@ import 'package:exp_an/models/models.dart';
 import 'reducers/app_state_reducer.dart';
 import 'middlewares/middlewares.dart';
 import 'package:exp_an/presentation/home_screen.dart';
+import 'containers/add_transaction.dart';
+import 'presentation/period_picker.dart';
 
 void main() => runApp(new MyApp());
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
               ),
               new ArcData(
                   startAngle: 5.49779,
-                  angle: 1.5708,
+                  angle: 1.0,
                   color: Colors.deepPurple
               ),
             ]
@@ -43,6 +45,14 @@ class MyApp extends StatelessWidget {
         store: store,
         child: new MaterialApp(
           title: 'ExpAn',
+          routes: {
+            '/addTransaction':(context){
+              return new AddTransaction();
+            },
+            '/periodPicker': (context){
+              return new PeriodPicker();
+            }
+          },
           home: new StoreBuilder<AppState>(
               onInit: (store) => store.dispatch(new GetCount()),
               builder: (context, store){
