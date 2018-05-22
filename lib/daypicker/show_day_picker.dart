@@ -112,9 +112,6 @@ class _DatePickerHeader extends StatelessWidget {
         break;
     }
 
-
-
-
     double width;
     double height;
     EdgeInsets padding;
@@ -308,17 +305,23 @@ class DayPicker extends StatelessWidget {
   /// ```
 
 
+  //
+
+
+
+
+
+
   List<Widget> _getDayHeaders(TextStyle headerStyle, MaterialLocalizations localizations) {
     final List<Widget> result = <Widget>[];
     for (int i = localizations.firstDayOfWeekIndex; true; i = (i + 1) % 7) {
       final String weekday = localizations.narrowWeekdays[i];
       result.add(new ExcludeSemantics(
-        child: new Center(child: new Text('Hellooo!!', style: headerStyle)),
+        child: new Center(child: new Text(weekday, style: headerStyle)),
       ));
       if (i == (localizations.firstDayOfWeekIndex - 1) % 7)
         break;
     }
-
 
 
     return result;
@@ -403,6 +406,7 @@ class DayPicker extends StatelessWidget {
       if (day > daysInMonth)
         break;
       if (day < 1) {
+
         labels.add(new Container());
       } else {
         final DateTime dayToBuild = new DateTime(year, month, day);
@@ -413,6 +417,7 @@ class DayPicker extends StatelessWidget {
 
         BoxDecoration decoration;
         TextStyle itemStyle = themeData.textTheme.body1;
+
 
         bool isSelectedDay = false;
 

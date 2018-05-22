@@ -8,6 +8,7 @@ import 'middlewares/middlewares.dart';
 import 'package:exp_an/presentation/home_screen.dart';
 import 'containers/add_transaction.dart';
 import 'presentation/period_picker.dart';
+import 'package:exp_an/presentation/add_edit_screen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -47,16 +48,15 @@ class MyApp extends StatelessWidget {
           title: 'ExpAn',
           routes: {
             '/addTransaction':(context){
-              return new AddTransaction();
+              return new AddEditScreen();
             },
             '/periodPicker': (context){
               return new PeriodPicker();
             }
           },
           home: new StoreBuilder<AppState>(
-              onInit: (store) => store.dispatch(new GetCount()),
               builder: (context, store){
-                return new HomeScreen();
+                return new HomeScreen(store.state.arcList);
               }
           ),
         )

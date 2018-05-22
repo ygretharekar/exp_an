@@ -21,3 +21,19 @@ class AddTrans{
 
   AddTrans(this.transaction);
 }
+
+class EditTrans{
+  final String uuid;
+
+  EditTrans(this.uuid);
+}
+
+class GetTrans{
+  GetTrans();
+}
+
+class LoadTrans{
+  List<Transaction> trans;
+
+  LoadTrans(this.trans);
+}

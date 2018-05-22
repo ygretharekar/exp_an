@@ -15,7 +15,6 @@ class AppState{
     this.tab = AppTab.arc,
     this.initialFunds = 10000.0,
     this.arcList,
-    this.transactions
+    this.transactions = const <Transaction>[]
   });
-
 }

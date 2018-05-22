@@ -12,7 +12,8 @@ class AddTransaction extends StatelessWidget {
     return
       new StoreConnector<AppState, Function(Transaction)>(
         builder: (BuildContext context, Function(Transaction) addTrans){
-          return new AddEditScreen(false, addTrans);
+
+          return new AddEditScreen();
         },
         converter: (Store<AppState> store){
           return (Transaction transaction) =>

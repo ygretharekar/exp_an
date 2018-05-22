@@ -49,7 +49,6 @@ class ArcPainter extends CustomPainter {
 
     TextSpan rupee;
 
-
     TextStyle style = new TextStyle(
         color: Colors.white70
     );
@@ -93,6 +92,7 @@ class ArcPainter extends CustomPainter {
         canvas,
         new Offset(size.width/2 - tp.width/2, size.height/2 - 20.0)
     );
+
 
     TextSpan rem = new TextSpan(
         text: 'remaining',
