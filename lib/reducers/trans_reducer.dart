@@ -4,9 +4,10 @@ import 'package:exp_an/models/models.dart';
 
 List<Transaction> _addTrans(List<Transaction> tList, AddTrans action){
 
-  tList.add(action.transaction);
+  List<Transaction> myList = tList.map((e) => e).toList(growable: true)
+                                ..add(action.transaction);
 
-  return tList;
+  return myList;
 }
 
 List<Transaction> _loadTrans(List<Transaction> tList, LoadTrans action) =>
@@ -14,10 +15,8 @@ List<Transaction> _loadTrans(List<Transaction> tList, LoadTrans action) =>
 
 List<Transaction> _editTrans(List<Transaction> tList, EditTrans action){
   //  int i = 0;
-
   tList.forEach(
       (t){
-
         if(t.uuid == action.uuid){
         }
         //        else i++;

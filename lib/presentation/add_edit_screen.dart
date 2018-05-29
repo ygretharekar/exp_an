@@ -148,18 +148,23 @@ class _AddEditScreenState extends State<AddEditScreen> {
                           null;
                     },
                   ),
-
                   new TextFormField(
-                    initialValue: isEditing ? transaction.cost:'',
                     key: _costKey,
                     keyboardType: TextInputType.number,
+                    textAlign: TextAlign.right,
                     decoration: new InputDecoration(
-                      hintText: 'Price',
-                      labelText: 'Price'
+                      labelText: 'Price',
                     ),
-                    validator: (val){
-                      double cost = double.parse(val);
-                      return cost.isFinite ? 'Error':null;
+                    validator: (String value) {
+                      if(value == null) {
+                        return null;
+                      }
+                      
+                      _cost = double.parse(value);
+                      if(_cost == null) {
+                        return '"$value" is not a valid number';
+                      }
+                      return null;
                     },
                   ),
 
@@ -215,7 +220,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
             if(_formKey.currentState.validate()){
               print('validated');
               Transaction trans = new Transaction(
-                  _costKey.currentState.value.truncateToDouble(),
+                  _cost,
                   _descKey.currentState.value,
                   category: _categories,
                   periodic: _periodic,
@@ -224,8 +229,8 @@ class _AddEditScreenState extends State<AddEditScreen> {
               );
               store.dispatch(new AddTrans(trans));
             }
-            
-//            Navigator.pop(context);
+
+            Navigator.pop(context);
           }
       ),
     );

@@ -9,15 +9,23 @@ class TransListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(
+    return new Container(
+      child: new ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, i) {
+          String cat = list[i].category.toString();
           return new  ListTile(
-            leading: new Text(list[i].cost.toString()),
-            title: new Text(list[i].category.toString()),
+            leading: new Text(
+                list[i].cost.toString(),
+                textScaleFactor: 1.3,
+            ),
+            title: new Text(
+              cat.split('.')[1].toUpperCase()
+            ),
             subtitle: new Text(list[i].description),
           );
-        }
+        },
+      )
     );
   }
 }

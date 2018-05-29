@@ -22,4 +22,11 @@ class ArcData {
           color: Color.lerp(Colors.white, end.color, t)
       );
 
+  Map<String, Object> toJson() {
+    return {
+      'startAngle': startAngle,
+      'angle': angle,
+      'color': color.value
+    };
+  }
 }

@@ -8,10 +8,10 @@ class ArcContainer extends StatelessWidget {
   final ViewModelBuilder<ArcList> builder;
 
   ArcContainer({Key key, @required this.builder}):super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector(
+    return new StoreConnector<AppState, ArcList>(
         distinct: true,
         builder: builder,
         converter: (Store<AppState> store) =>

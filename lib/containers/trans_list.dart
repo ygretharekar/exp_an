@@ -9,9 +9,8 @@ class TransList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, List<Transaction>>(
-        onInit: (store) => store.dispatch(new GetTrans()),
         builder: (BuildContext context, List<Transaction> transactions){
-          new TransListWidget(transactions);
+          return new TransListWidget(transactions);
         },
         converter: (Store<AppState> store) => store.state.transactions
     );

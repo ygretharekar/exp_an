@@ -117,6 +117,7 @@ class ArcPainter extends CustomPainter {
 
   }
 
+
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 

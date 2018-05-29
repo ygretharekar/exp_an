@@ -6,20 +6,17 @@ import 'package:exp_an/models/models.dart';
 import 'reducers/app_state_reducer.dart';
 import 'middlewares/middlewares.dart';
 import 'package:exp_an/presentation/home_screen.dart';
-import 'containers/add_transaction.dart';
-import 'presentation/period_picker.dart';
 import 'package:exp_an/presentation/add_edit_screen.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-
   final store = new Store<AppState>(
     appReducer,
     initialState: new AppState(
         arcList:  new ArcList(
             [
-              new ArcData(
+              /*new ArcData(
                   startAngle: 2.35619,
                   angle: 1.5708,
                   color: Colors.deepOrange
@@ -33,7 +30,7 @@ class MyApp extends StatelessWidget {
                   startAngle: 5.49779,
                   angle: 1.0,
                   color: Colors.deepPurple
-              ),
+              ),*/
             ]
         )
     ),
@@ -49,12 +46,13 @@ class MyApp extends StatelessWidget {
           routes: {
             '/addTransaction':(context){
               return new AddEditScreen();
-            },
-            '/periodPicker': (context){
-              return new PeriodPicker();
             }
           },
           home: new StoreBuilder<AppState>(
+              onInit: (store){
+                store.dispatch(new GetTrans());
+                store.dispatch(new GetArcs());
+              },
               builder: (context, store){
                 return new HomeScreen(store.state.arcList);
               }

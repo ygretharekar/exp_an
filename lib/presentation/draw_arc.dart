@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:exp_an/models/models.dart';
 import 'arc_painter.dart';
 import 'package:exp_an/containers/trans_list.dart';
+import 'package:exp_an/containers/arc_container.dart';
+import 'setting_widget.dart';
 
 class DrawArc extends StatefulWidget {
   final ArcList arcList;
@@ -29,7 +31,7 @@ class DrawArcState extends State<DrawArc> with TickerProviderStateMixin {
 
   List<Widget> pages = [
     new Center(
-      child: new Text('Page 0'),
+      child: new Setting(),
     ),
     new Center(
       child: new Text('Page 1'),
@@ -62,79 +64,89 @@ class DrawArcState extends State<DrawArc> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context){
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(
-            'Expense Analysis'
-        ),
+    return new ArcContainer(
+        builder: (BuildContext context, ArcList arcList){
+          tween = new ArcListTween(
+              new ArcList.empty(arcList),
+              arcList
+          );
 
-        bottom: _index == 1 ? new PreferredSize(
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                new Container(
-                  padding: const EdgeInsets.all(28.0),
-                  child: new Center(
-                      child: new Column(
-                        children: <Widget>[
-                          new CustomPaint(
-                            size: new Size(250.0, 250.0),
-                            painter: new ArcPainter(tween.animate(animation)),
-                          ),
-                        ],
+          animation.forward(from: 0.0);
+
+          return new Scaffold(
+            appBar: new AppBar(
+              title: new Text(
+                  'Expense Analysis'
+              ),
+
+              bottom: _index == 1 ? new PreferredSize(
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.all(28.0),
+                        child: new Center(
+                            child: new Column(
+                              children: <Widget>[
+                                new CustomPaint(
+                                  size: new Size(250.0, 250.0),
+                                  painter: new ArcPainter(tween.animate(animation)),
+                                ),
+                              ],
+                            )
+                        ),
                       )
+                    ],
                   ),
-                )
+                  preferredSize: new Size(200.0, 300.0)
+              ):
+              null,
+              actions: <Widget>[
               ],
             ),
-            preferredSize: new Size(200.0, 300.0)
-        ):
-        null,
-        actions: <Widget>[
-        ],
-      ),
 
-      body: pages[this._index],
+            body: pages[this._index],
 
-      bottomNavigationBar:  new BottomNavigationBar(
-          currentIndex: _index,
-          onTap: (int _i){
-            setState(
-                (){
-                  this._index = _i;
-                  if(_i == 1) animation.forward(from: 0.0);
+            bottomNavigationBar:  new BottomNavigationBar(
+              currentIndex: _index,
+              onTap: (int _i){
+                setState(
+                        (){
+                      this._index = _i;
+                      if(_i == 1) animation.forward(from: 0.0);
 
-                }
-            );
-          },
-          items: <BottomNavigationBarItem>[
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.settings),
-                title: new Text('setting')
+                    }
+                );
+              },
+              items: <BottomNavigationBarItem>[
+                new BottomNavigationBarItem(
+                    icon: new Icon(Icons.settings),
+                    title: new Text('setting')
+                ),
+                new BottomNavigationBarItem(
+                    icon: new Icon(Icons.home),
+                    title: new Text('home')
+                ),
+                new BottomNavigationBarItem(
+                    icon: new Icon(Icons.account_balance_wallet),
+                    title: new Text('details')
+                ),
+              ],
             ),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.home),
-                title: new Text('home')
+
+            floatingActionButton: new FloatingActionButton(
+              onPressed: (){
+                Navigator.pushNamed(context, '/addTransaction');
+              },
+              child: new Icon(Icons.add),
             ),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.account_balance_wallet),
-                title: new Text('details')
-            ),
-          ],
-      ),
 
-      floatingActionButton: new FloatingActionButton(
-          onPressed: (){
-            Navigator.pushNamed(context, '/addTransaction');
-          },
-          child: new Icon(Icons.add),
-      ),
+            drawer: _index == 1 ? new Drawer(
+              child: new ListView(),
+            ): null,
 
-      drawer: _index == 1 ? new Drawer(
-        child: new ListView(),
-      ): null,
-
+          );
+        }
     );
-
   }
 }

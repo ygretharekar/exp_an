@@ -10,11 +10,22 @@ class SetCount{
   SetCount(this.count);
 }
 
+class GetArcs{
+  GetArcs();
+}
+
 class AddArc{
   final ArcData arc;
 
   AddArc(this.arc);
 }
+
+class LoadArcs{
+  final List<ArcData> list;
+
+  LoadArcs(this.list);
+}
+
 
 class AddTrans{
   final Transaction transaction;
@@ -36,4 +47,8 @@ class LoadTrans{
   List<Transaction> trans;
 
   LoadTrans(this.trans);
+}
+
+class ClearData {
+  ClearData();
 }
