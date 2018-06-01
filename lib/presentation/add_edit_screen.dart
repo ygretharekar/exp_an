@@ -106,7 +106,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
                         DateTime fistDate = new DateTime(date.year, date.month, 1);
 
                         DateTime lastDate = fistDate.add(
-                            new Duration(days: daysInMonth - 1)
+                            new Duration(days: daysInMonth)
                         );
 
                         if(!period){

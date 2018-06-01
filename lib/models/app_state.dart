@@ -8,6 +8,7 @@ class AppState{
   final double initialFunds;
   final ArcList arcList;
   final List<Transaction> transactions;
+  final List<Map<String, Object>> drawer;
 
   AppState({
     this.isLoading = false,
@@ -15,6 +16,7 @@ class AppState{
     this.tab = AppTab.arc,
     this.initialFunds = 10000.0,
     this.arcList,
-    this.transactions = const <Transaction>[]
+    this.transactions = const <Transaction>[],
+    this.drawer = const []
   });
 }

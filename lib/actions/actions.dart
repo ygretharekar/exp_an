@@ -52,3 +52,18 @@ class LoadTrans{
 class ClearData {
   ClearData();
 }
+
+class UpdateDrawer {
+
+  final List<Map<String, Object>> drawer;
+
+  UpdateDrawer(this.drawer);
+}
+
+class UpdateFunds {
+
+  final double funds;
+
+  UpdateFunds(this.funds);
+
+}

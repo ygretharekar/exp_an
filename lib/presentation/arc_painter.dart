@@ -4,8 +4,9 @@ import 'dart:ui';
 
 class ArcPainter extends CustomPainter {
   final Animation<ArcList> animation;
+  final String funds;
 
-  ArcPainter(Animation<ArcList> animation):
+  ArcPainter(Animation<ArcList> animation, {this.funds = '10000'}):
     animation = animation,
     super(repaint: animation);
 
@@ -72,7 +73,7 @@ class ArcPainter extends CustomPainter {
     );
 
     TextSpan span = new TextSpan(
-        text: '10000',
+        text: funds,
         style: new TextStyle(
           color: Colors.white,
           fontFamily: 'Gugi'

@@ -68,8 +68,6 @@ class TransStorage {
     final arcs = (json['arclist'] as List)
                   .map((t) => fromJsonArcData(t)).toList();
 
-
-
     return arcs;
   }
 
@@ -86,7 +84,7 @@ class TransStorage {
       {
         'startAngle': 0.0,
         'angle': 0.0,
-        'color':  Colors.black12
+        'color':  Colors.black
       },
       {
         'startAngle': 0.0,
@@ -144,30 +142,6 @@ class TransStorage {
     const double startAngle = 2.35619;
     const double endAngle = 7.06858;
 
-    /*double angle = startAngle;
-    double nextAngle = 0.0;
-    double addAngle = 0.0;
-
-    final List<Map<String, Object>> arcList = <Map<String, Object>>[];
-
-    trans.forEach(
-      (t){
-          *//*nextAngle = angle;
-
-          addAngle = (t.cost/this.initialCost) * 4.71239;
-
-          angle = angle + addAngle;
-
-          arcList.add(
-              new ArcData(
-                  startAngle: nextAngle > endAngle ? 0.0:nextAngle,
-                  angle: addAngle,
-                  color: _getColor(t.category)
-              ).toJson()
-          );*//*
-      }
-    );*/
-
     double prevAngle = startAngle;
     double sa = 0.0;
     double a = 0.0;
@@ -212,14 +186,12 @@ class TransStorage {
 
   Future<FileSystemEntity> clean() async {
     final file = await _getLocalFile();
-
     return file.delete();
   }
 
   Color _getColor(Categories category){
-
     if(Categories.food == category) return Colors.green;
-    else if(Categories.miscellaneous == category) return Colors.black12;
+    else if(Categories.miscellaneous == category) return Colors.black;
     else if(Categories.bill == category) return Colors.amber;
     else if(Categories.donation == category) return Colors.pinkAccent;
     else if(Categories.entertainment == category) return Colors.redAccent;
@@ -229,6 +201,6 @@ class TransStorage {
     else if(Categories.service == category) return Colors.orange;
     else if(Categories.ticket == category) return Colors.cyanAccent;
     else if(Categories.transport == category) return Colors.indigo;
-    return Colors.white24;
+    return Colors.black12;
   }
 }

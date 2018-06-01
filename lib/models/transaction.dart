@@ -16,14 +16,15 @@ class Transaction {
     this.description,
     {
         DateTime dateTime,
-        this.category = Categories.miscellaneous,
+        Categories category,
         this.periodic = false,
         String uuid,
         this.important = false,
         this.occurrences = const <DateTime>[]
     }
   ):this.uuid = uuid ?? new Uuid().v1(),
-    this.dateTime = dateTime ?? new DateTime.now();
+    this.dateTime = dateTime ?? new DateTime.now(),
+    this.category = category ?? Categories.miscellaneous;
 
 
   Map<String, Object> toJson() {
