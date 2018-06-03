@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:exp_an/actions/actions.dart';
+import 'select_trans_screen.dart';
 
 class AddEditScreen extends StatefulWidget {
 
@@ -60,8 +61,6 @@ class _AddEditScreenState extends State<AddEditScreen> {
   @override
   Widget build(BuildContext context) {
 
-    Transaction transaction = saveTrans;
-
     ///////////
 
     return new Scaffold(
@@ -106,7 +105,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
                         DateTime fistDate = new DateTime(date.year, date.month, 1);
 
                         DateTime lastDate = fistDate.add(
-                            new Duration(days: daysInMonth)
+                            new Duration(days: daysInMonth - 1)
                         );
 
                         if(!period){
@@ -156,14 +155,15 @@ class _AddEditScreenState extends State<AddEditScreen> {
                       labelText: 'Price',
                     ),
                     validator: (String value) {
-                      if(value == null) {
-                        return null;
-                      }
-                      
                       _cost = double.parse(value);
                       if(_cost == null) {
                         return '"$value" is not a valid number';
                       }
+
+                      if(_cost == 0.0) {
+                        return '"$value" price cannot be zero';
+                      }
+
                       return null;
                     },
                   ),
@@ -212,13 +212,13 @@ class _AddEditScreenState extends State<AddEditScreen> {
             return new FloatingActionButton(
               onPressed: callback,
               tooltip: 'Save Transaction',
-              child: new Icon(Icons.check),
+              child: new Icon(Icons.forward),
             );
           },
 
           converter: (Store<AppState> store) => () {
             if(_formKey.currentState.validate()){
-              print('validated');
+
               Transaction trans = new Transaction(
                   _cost,
                   _descKey.currentState.value,
@@ -227,10 +227,51 @@ class _AddEditScreenState extends State<AddEditScreen> {
                   important: _important,
                   occurrences: _periodic ? dates: []
               );
-              store.dispatch(new AddTrans(trans));
-            }
 
-            Navigator.pop(context);
+              List<int> sendList = <int>[];
+
+              dates?.forEach(
+                  (date){
+                    sendList.add(int.parse(date.toString().split('-')[2].split(' ')[0]) - 1);
+                  }
+              );
+
+              if(dates != null) store.dispatch(new Recurring(trans, sendList));
+
+              final DateTime date = new DateTime.now();
+
+              List<Transaction> aList = store.state.recurring[date.day];
+
+              dates == null ? aList.add(trans):aList;
+
+              /*aList.forEach(
+                  (t){
+                    print('Trans: $t');
+                  }
+              );*/
+
+//              store.dispatch(new AddTrans(trans));
+
+//              Navigator.pushNamed(context, '/confirmTransactions');
+
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      new AnimatedListSample(
+                          aList,
+                          (List<Transaction> finalList){
+                            finalList?.forEach(
+                                (t) {
+                                  store.dispatch(new AddTrans(t));
+                                }
+                            );
+                          }
+                      )
+                ),
+              );
+
+            }
           }
       ),
     );

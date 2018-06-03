@@ -9,7 +9,9 @@ class AppState{
   final ArcList arcList;
   final List<Transaction> transactions;
   final List<Map<String, Object>> drawer;
-
+  final List<List<Transaction>> recurring;
+  final List<Transaction> today;
+  
   AppState({
     this.isLoading = false,
     this.count = 0,
@@ -17,6 +19,9 @@ class AppState{
     this.initialFunds = 10000.0,
     this.arcList,
     this.transactions = const <Transaction>[],
-    this.drawer = const []
-  });
+    this.today = const <Transaction>[],
+    this.drawer = const [],
+    List<List<Transaction>> recurring
+  }):
+  this.recurring = recurring ?? new List.generate(31, (i) => <Transaction>[]);
 }

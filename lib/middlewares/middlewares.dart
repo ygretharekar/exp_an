@@ -124,6 +124,20 @@ Middleware<AppState> _loadArcs(TransStorage file) =>
       next(action);
     };
 
+Middleware<AppState> _loadRecurring(TransStorage file) =>
+    (Store<AppState> store, action, NextDispatcher next) async {
+
+      await file
+            .loadRecurring()
+            .then(
+                (lists){
+                  store.dispatch(new LoadRecurring(lists));
+                }
+            );
+
+      next(action);
+    };
+
 Middleware<AppState> _saveTrans(TransStorage file) =>
     (Store<AppState> store, action, NextDispatcher next) async {
       next(action);
@@ -186,10 +200,8 @@ Middleware<AppState> _saveTrans(TransStorage file) =>
         }
       ];
 
-
-
       await file
-            .saveTrans(store.state.transactions);
+            .saveTrans(store.state.transactions, store.state.recurring);
 
       list.forEach(
               (item){
@@ -213,6 +225,14 @@ Middleware<AppState> _saveTrans(TransStorage file) =>
                 store.dispatch(new LoadArcs(arcs));
               }
           );
+      
+      await file
+          .loadRecurring()
+          .then(
+              (lists){
+                store.dispatch(new LoadRecurring(lists));
+              }
+          );
 
     };
 
@@ -225,8 +245,9 @@ Middleware<AppState> _cleanFile(TransStorage file) =>
 
           store.dispatch(new LoadArcs([]));
 
-          store.dispatch(new AddTrans(new Transaction(0.0, '')));
+          store.dispatch(new LoadRecurring(new List.generate(31, (i) => <Transaction>[])));
 
+          store.dispatch(new AddTrans(new Transaction(0.0, '')));
 
         };
 
@@ -240,6 +261,7 @@ List<Middleware<AppState>> createMiddleware([
   final Middleware<AppState> loadTrans = _loadTrans(storage);
   final Middleware<AppState> saveTrans = _saveTrans(storage);
   final Middleware<AppState> loadArcs = _loadArcs(storage);
+  final Middleware<AppState> loadRecurring = _loadRecurring(storage);
   final Middleware<AppState> cleanFile = _cleanFile(storage);
 
   return <Middleware<AppState>>[
@@ -247,6 +269,7 @@ List<Middleware<AppState>> createMiddleware([
 //    new TypedMiddleware<AppState, GetCount>(readCount),
     new TypedMiddleware<AppState, GetTrans>(loadTrans),
     new TypedMiddleware<AppState, GetArcs>(loadArcs),
+    new TypedMiddleware<AppState, GetRecurring>(loadRecurring),
     new TypedMiddleware<AppState, AddTrans>(saveTrans),
     new TypedMiddleware<AppState, ClearData>(cleanFile),
     new LoggingMiddleware.printer()

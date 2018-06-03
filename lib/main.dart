@@ -7,6 +7,7 @@ import 'reducers/app_state_reducer.dart';
 import 'middlewares/middlewares.dart';
 import 'package:exp_an/presentation/home_screen.dart';
 import 'package:exp_an/presentation/add_edit_screen.dart';
+import 'presentation/select_trans_screen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
               onInit: (store){
                 store.dispatch(new GetTrans());
                 store.dispatch(new GetArcs());
+                store.dispatch(new GetRecurring());
               },
               builder: (context, store){
                 return new HomeScreen(store.state.arcList);

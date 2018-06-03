@@ -67,3 +67,30 @@ class UpdateFunds {
   UpdateFunds(this.funds);
 
 }
+
+class Recurring {
+  final Transaction transaction;
+
+  final List<int> list;
+
+  Recurring(this.transaction, this.list);
+
+}
+
+class LoadRecurring {
+  final List<List<Transaction>> list;
+
+  LoadRecurring(this.list);
+}
+
+class GetRecurring {
+  GetRecurring();
+}
+
+class LoadToday {
+  final List<Transaction> list;
+
+  LoadToday(this.list);
+
+
+}

@@ -71,7 +71,28 @@ class TransStorage {
     return arcs;
   }
 
-  Future<File> saveTrans(List<Transaction> trans) async {
+  Future<List<List<Transaction>>> loadRecurring() async {
+    final file = await _getLocalFile();
+    final string = await file.readAsString();
+
+    final json = new JsonDecoder().convert(string);
+
+//    print('ArcList: ' + json['arclist'].toString());
+
+    final dateList = (json['recurring'] as List);
+    final ansList = dateList
+                      ?.map(
+                        (t) => (t as List)?.map(
+                            (trans) => fromJson(trans)
+                        ).toList()
+                      ).toList();
+
+//    print('ansList: $ansList');
+
+    return ansList;
+  }
+
+  Future<File> saveTrans(List<Transaction> trans, List<List<Transaction>> rList) async {
 
     final file = await _getLocalFile();
 
@@ -178,7 +199,8 @@ class TransStorage {
       new JsonEncoder().convert(
         {
           'transactions': trans.toList(),
-          'arclist': ansList
+          'arclist': ansList,
+          'recurring': rList
         }
       )
     );
